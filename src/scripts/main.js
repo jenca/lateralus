@@ -7,8 +7,10 @@ function preload() {
 }
 
 function create() {
-	game.stage.backgroundColor = 0x3b0760;
-    text = game.add.text(game.world.centerX, game.world.centerY, "- PHASER -");
+	word = "- GAMESTARTER -";
+
+	game.stage.backgroundColor = 0xbd4030;
+    text = game.add.text(game.world.centerX, game.world.centerY, word);
 
     text.anchor.set(0.5);
     text.align = 'center';
@@ -18,7 +20,7 @@ function create() {
     text.fontSize = 70;
     text.fill = '#ffffff';
 
-    textReflect = game.add.text(game.world.centerX, game.world.centerY + 50, "- PHASER -");
+    textReflect = game.add.text(game.world.centerX, game.world.centerY + 50, word);
 
     textReflect.anchor.set(0.5);
     textReflect.align = 'center';
@@ -31,7 +33,7 @@ function create() {
     var grd = textReflect.context.createLinearGradient(0, 0, 0, text.canvas.height);
 
     grd.addColorStop(0, 'rgba(255,255,255,0)');
-    grd.addColorStop(1, 'rgba(255,255,255,0.08)');
+    grd.addColorStop(1, 'rgba(255,255,255,0.15)');
 
     textReflect.fill = grd;
 }
