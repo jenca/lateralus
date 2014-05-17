@@ -1,7 +1,7 @@
 # gulpjs game template
 
 ```bash
-$ npm install -g gulpjs
+$ npm install -g gulp
 $ npm install -g bower
 $ npm install
 $ bower install
