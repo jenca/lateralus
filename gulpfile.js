@@ -1,91 +1,55 @@
-var fs = require('fs-extra'),
-    gulp = require('gulp'),
-    $ = require('gulp-load-plugins')({ lazy: false, camelize: true });
-
-var paths = {
-  src : {
-    html: 'src/*.html',
-    styles: 'src/styles/**/*.css',
-    scripts: 'src/scripts/**/*.js',
-    images: 'src/images/**/*',
-    sounds: 'src/sounds/**/*',
-  },
-  dest : {
-    html: 'app',
-    styles: 'app/css',
-    scripts: 'app/js',
-    images: 'app/assets',
-    sounds: 'app/assets',
-  }
-};
+var gulp = require('gulp');
+var $ = require('gulp-load-plugins')({ lazy: false, camelize: true });
+var browserify = require('browserify');
+var source = require('vinyl-source-stream');
 
 gulp.task('html', function() {
-  return gulp.src(paths.src.html)
+  return gulp.src('src/index.html')
     .pipe($.minifyHtml())
-    .pipe(gulp.dest(paths.dest.html))
-    .pipe($.connect.reload());
-});
-
-gulp.task('styles', function() {
-  return gulp.src(paths.src.styles)
-    .pipe($.concat('app.css'))
-    .pipe($.csso())
-    .pipe(gulp.dest(paths.dest.styles))
-    .pipe($.connect.reload());
+    .pipe(gulp.dest('app'));
 });
 
 gulp.task('scripts', function() {
-  return gulp.src(paths.src.scripts)
-    .pipe($.uglify())
-    .pipe($.concat('app.js'))
-    .pipe(gulp.dest(paths.dest.scripts))
-    .pipe($.connect.reload());
+	return browserify('./src/scripts/main.js')
+	.bundle()
+	.pipe(source('app.js'))
+	.pipe(gulp.dest('app'));
 });
 
 gulp.task("vendor", function(){
-    $.bowerFiles().pipe(gulp.dest(paths.dest.scripts));
+    $.bowerFiles().pipe(gulp.dest('app'));
 });
 
-gulp.task('images', function() {
- return gulp.src(paths.src.images)
-    .pipe($.imagemin({optimizationLevel: 3}))
-    .pipe(gulp.dest(paths.dest.images))
-    .pipe($.connect.reload());
+gulp.task('styles', function() {
+	gulp.src('src/styles/**')
+	.pipe($.concat('app.css'))
+	.pipe($.csso())
+	.pipe(gulp.dest('app'));
 });
 
-gulp.task('sounds', function() {
- return gulp.src(paths.src.sounds, { read: false })
-    .pipe(gulp.dest(paths.dest.sounds))
-    .pipe($.connect.reload());
+gulp.task('assets', function () {
+	gulp.src('src/assets').pipe(gulp.dest('app/assets'));
 });
 
 gulp.task('connect', $.connect.server({
-  root: [paths.dest.html],
-  port: 8080,
-  livereload: true
+	root: ['app'], port: 8080, livereload: true
 }));
 
+gulp.task('clean', function () {
+	gulp.src('app', {read: false}).pipe($.clean({force: true}));
+});
+
 gulp.task('watch', function() {
-  gulp.watch(paths.src.html, ['html']);
-  gulp.watch(paths.src.styles, ['styles']);
-  gulp.watch(paths.src.scripts, ['scripts']);
-  gulp.watch(paths.src.images, ['images']);
-  gulp.watch(paths.src.sounds, ['sounds']);
+	gulp.watch('src/index.html', ['html']);
+	gulp.watch('src/scripts/**/*', ['scripts']);
+	gulp.watch('src/styles/**/*', ['styles']);
+	gulp.watch('src/assets/**/*', ['assets']);
+	gulp.watch('app/*', function (e) {
+		gulp.src(e.path)
+		.pipe($.connect.reload());
+	});
 });
 
-gulp.task('clean', function() {
-  fs.removeSync(paths.dest.html, function (err) {
-    if (err) throw err;
-  });
-});
+gulp.task('build', ['html', 'scripts', 'vendor', 'styles', 'assets']);
 
-gulp.task('test', function() {
-  return gulp.src('test/**/*.js')
-    .pipe($.mocha());
-});
-
-gulp.task('build', ['html', 'styles', 'scripts', 'vendor', 'images', 'sounds']);
-
-gulp.task('dev', ['build', 'connect', 'watch']);
-
-gulp.task('default', ['build', 'watch']);
+gulp.task('default', ['build', 'connect', 'watch']);
