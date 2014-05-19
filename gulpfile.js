@@ -33,8 +33,8 @@ gulp.task('styles', function() {
 });
 
 gulp.task('assets', function () {
-	gulp.src('src/assets')
-	.pipe(gulp.dest('app/assets'))
+	gulp.src('src/assets/**/*')
+	.pipe(gulp.dest('app'))
 	.on('error', $.util.log);
 });
 
