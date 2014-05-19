@@ -17,7 +17,7 @@ gulp.task('run', function (cb) {
 gulp.task('html', function() {
 	gulp.src('src/index.html')
 	.pipe($.minifyHtml())
-	.pipe(gulp.dest('app'))
+	.pipe(gulp.dest('public'))
 	.on('error', $.util.log);
 });
 
@@ -25,13 +25,13 @@ gulp.task('scripts', function() {
 	browserify('./src/scripts/main.js')
 	.bundle()
 	.pipe(source('app.js'))
-	.pipe(gulp.dest('app'))
+	.pipe(gulp.dest('public'))
 	.on('error', $.util.log);
 });
 
 gulp.task("vendor", function(){
 	$.bowerFiles()
-	.pipe(gulp.dest('app'))
+	.pipe(gulp.dest('public'))
 	.on('error', $.util.log);
 });
 
@@ -39,26 +39,26 @@ gulp.task('styles', function() {
 	gulp.src('src/styles/**')
 	.pipe($.concat('app.css'))
 	.pipe($.csso())
-	.pipe(gulp.dest('app'))
+	.pipe(gulp.dest('public'))
 	.on('error', $.util.log);
 });
 
 gulp.task('assets', function () {
 	gulp.src('src/assets/**/*')
-	.pipe(gulp.dest('app'))
+	.pipe(gulp.dest('public'))
 	.on('error', $.util.log);
 
 	gulp.src('src/package.json')
-	.pipe(gulp.dest('app'))
+	.pipe(gulp.dest('public'))
 	.on('error', $.util.log);
 });
 
 gulp.task('connect', $.connect.server({
-	root: ['app'], port: 8080, livereload: true
+	root: ['public'], port: 8080, livereload: true
 }));
 
 gulp.task('clean', function () {
-	gulp.src('app', {read: false})
+	gulp.src('public', {read: false})
 	.pipe($.clean({force: true}))
 	.on('error', $.util.log);
 });
@@ -68,7 +68,7 @@ gulp.task('watch', function() {
 	gulp.watch('src/scripts/**/*', ['scripts']);
 	gulp.watch('src/styles/**/*', ['styles']);
 	gulp.watch('src/assets/**/*', ['assets']);
-	gulp.watch('app/*', function (e) {
+	gulp.watch('public/*', function (e) {
 		gulp.src(e.path)
 		.pipe($.connect.reload());
 	});

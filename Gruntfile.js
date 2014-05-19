@@ -10,7 +10,7 @@ module.exports = function(grunt) {
         linux32: true,
         linux64: true
       },
-      src: './app/**/*'
+      src: './public/**/*'
     }
   });
 
