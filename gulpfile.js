@@ -7,9 +7,9 @@ var source = require('vinyl-source-stream');
 $.grunt(gulp, {base: './'});
 
 gulp.task('run', function (cb) {
-	exec('./node_modules/.bin/nodewebkit app', function (err, stdout, stderr) {
-		console.log(stdout);
-		console.log(stderr);
+	exec('./node_modules/.bin/nodewebkit public', function (err, stdo, stde) {
+		console.log(stdo);
+		console.log(stde);
 		cb(err);
 	});
 });
