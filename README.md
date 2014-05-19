@@ -8,6 +8,8 @@ $ bower install
 $ gulp
 ```
 
-You can also run `$ gulp clean` and `$ gulp build`.
+This installs dependencies and starts a dev server at http://localhost:8080. Make changes to any files and it will rebuild and reload the page. No refreshing needed. Assets and bower components are minified and copied over.
 
-This starts a dev server at http://localhost:8080 and starts livereload. Make changes to any files and it will rebuild and reload the page. No refreshing needed. Assets are minified.
+You can `$ gulp clean` and `$ gulp build`, to clean the output folder and rebuild respectively.
+
+You can run also `$gulp run` to run your game standalone via node-webkit, or `$ gulp nodewebkit` to build your game for linux, mac, and windows.

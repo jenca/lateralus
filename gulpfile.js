@@ -1,7 +1,18 @@
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')({ lazy: false, camelize: true });
+var exec = require('child_process').exec;
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
+
+$.grunt(gulp, {base: './'});
+
+gulp.task('run', function (cb) {
+	exec('./node_modules/.bin/nodewebkit app', function (err, stdout, stderr) {
+		console.log(stdout);
+		console.log(stderr);
+		cb(err);
+	});
+});
 
 gulp.task('html', function() {
 	gulp.src('src/index.html')
@@ -36,6 +47,10 @@ gulp.task('assets', function () {
 	gulp.src('src/assets/**/*')
 	.pipe(gulp.dest('app'))
 	.on('error', $.util.log);
+
+	gulp.src('src/package.json')
+	.pipe(gulp.dest('app'))
+	.on('error', $.util.log);
 });
 
 gulp.task('connect', $.connect.server({
@@ -60,5 +75,7 @@ gulp.task('watch', function() {
 });
 
 gulp.task('build', ['html', 'scripts', 'vendor', 'styles', 'assets']);
+
+gulp.task('nodewebkit', ['build', 'grunt-nodewebkit']);
 
 gulp.task('default', ['build', 'connect', 'watch']);
