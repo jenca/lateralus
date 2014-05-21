@@ -1,6 +1,6 @@
 {
     "name": "gamestarter",
     "dependencies": {
-		"phaser-official": "2.0.4"
+		"phaser-official": "2.0.5"
     }
 }
