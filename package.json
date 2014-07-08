@@ -1,0 +1,24 @@
+{
+  "author": "Joseph Hager <ajhager@gmail.com>",
+  "name": "gamestarter",
+  "description": "Get started with making games with phaserjs.",
+  "version": "0.0.1",
+  "private": true,
+  "main": "index.html",
+  "dom_storage_quota": 1024,
+  "window": {
+    "//": "screen settings",
+    "title": "gamestarter",
+    "icon": "link.png",
+    "toolbar": false,
+    "frame": true,
+    "position": "center",
+    "width": 1280,
+    "height": 720,
+    "min_width": 1280,
+    "min_height": 720,
+    "resizable": false,
+    "always-on-top": false,
+    "fullscreen": false
+  }
+}
