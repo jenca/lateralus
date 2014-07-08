@@ -1,5 +1,264 @@
+@font-face {
+    font-family: tdh;
+    src: url("font/Bahasa Indonesia.ttf");
+}
+@font-face {
+    font-family: bsc;
+    src: url("font/BerlinSmallCaps.ttf");
+}
+@font-face {
+    font-family: faf;
+    src: url("font/FAFERS_Technical_Font.ttf");
+}
+
+
 body {
-    background-color: #161418;
-	margin: 0;
-	padding: 0;
+    margin: 0 auto;
+    padding: 0;
+}
+
+/*top menu style*/
+#top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    background-color: black;
+}
+
+#logo {
+    height: 4em;
+    width: 25em;
+    background-image: url("img/logo.jpg");
+    background-position: center 0em;
+    background-size: cover;
+}
+
+#menu {
+    margin-left: auto;
+}
+
+#menu ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+#menu li {
+    display: inline;
+    padding-left: 2em;
+    padding-right: 1em;
+}
+
+#menu a {
+    text-decoration: none;
+    color: white;
+    font-family: tdh;
+    font-size: 2.2em;
+}
+
+#menu a:hover {
+    text-decoration: underline;
+}
+/*end top menu style*/
+
+#main_image {
+    height: 39.2em;
+    background-image: url("img/main.jpg");
+    background-position: center 39em;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+}
+
+#eye {
+    align-self: flex-end;
+    padding-bottom: .2em;
+}
+
+/*band section*/
+#members {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 35.5em;
+}
+
+#dan {
+    background-image: url("img/dan/dan.jpg");
+    background-position: 45em 0em;
+}
+
+#noah {
+    background-image: url("img/noah/eight.jpg");
+    background-position: center 0em;
+}
+
+#tommy {
+    background-image: url("img/tommy/NINE.jpg");
+    background-position: center 0em;
+}
+
+#mark {
+    background-image: url("img/mark/one.jpg");
+    background-position: 39em 0em;
+}
+
+.band_member {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    flex-basis: 25%;
+    border: .2em solid black;
+    background-size: cover;
+}
+
+.band_member a {
+    text-decoration: none;
+    color: white;
+    padding-bottom: .5em;
+}
+
+.band_member a:hover {
+    text-decoration: underline;
+}
+
+.name {
+    margin: 0;
+    font-size: 5em;
+    font-family: bsc;
+    text-shadow: 3px 3px 2px black;
+}
+/*end band section*/
+
+/*upcoming shows*/
+#upcoming_shows {
+    margin: 0 auto;
+    width: 100%;
+    height: 35em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: white;
+    text-shadow: 3px 3px 2px black;
+    font-family: bsc;
+    background-image: url("img/tommy/three.jpg");
+    background-position: center 45em;
+    background-size: cover;
+}
+
+#upcoming_shows a {
+    color: white;
+    text-decoration: none;
+}
+
+#upcoming_shows ul{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    list-style: none;
+}
+
+.show:first-child {
+    display: list-item;
+}
+
+.show {
+    display: none;
+    text-align: center;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    font-size: 4em;
+}
+
+.place:hover {
+    text-decoration: underline;
+}
+/*end upcoming shows*/
+
+#index {
+    height: 30.2em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#index ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    padding-top: 2em;
+}
+
+#shows ul {
+    margin-left: 4em;
+}
+
+#gallery ul {
+    margin-right: 4em;
+}
+
+.title {
+    font-family: tdh;
+    font-size: 1.7em;
+}
+
+
+/*contact info*/
+#contact {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: black;
+    color: white;
+}
+
+.icon {
+    height: 3em;
+    width: 3em;
+    border-radius: .5em;
+    background-position: center 0em;
+    background-size: cover;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+#facebook {
+    background-image: url("img/facebook.png");
+}
+
+#google {
+    background-image: url("img/google.jpg");
+}
+
+#instagram {
+    background-image: url("img/instagram.png");
+}
+
+#twitter {
+    background-image: url("img/twitter.png");
+}
+
+#youtube {
+    background-image: url("img/youtube.jpg");
+}
+
+#updates {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    margin-left: auto;
+    margin-right: 1.5em;
+    font-family: tdh;
+    font-size: 1.6em;
+}
+
+#info {
+    display: flex;
+    flex-direction: row;
 }

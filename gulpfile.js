@@ -3,6 +3,7 @@ var $ = require('gulp-load-plugins')({ lazy: false, camelize: true });
 var exec = require('child_process').exec;
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
+var sass = require('gulp-sass');
 
 $.grunt(gulp, {base: './'});
 
@@ -12,6 +13,13 @@ gulp.task('run', function (cb) {
 		console.log(stde);
 		cb(err);
 	});
+});
+
+gulp.task('sass', function() {
+    gulp.src('src/styles/**')
+    .pipe(sass())
+    .pipe(gulp.dest('public'))
+    .on('error', $.util.log);
 });
 
 gulp.task('html', function() {
